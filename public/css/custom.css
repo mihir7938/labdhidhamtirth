@@ -1,0 +1,396 @@
+.dropdown-toggle {
+    font-size: 15px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #fff;
+    font-weight: 500;
+    opacity: 1 !important;
+    cursor: pointer;
+}
+.dropdown-toggle::after {
+    display: none;
+}
+.dropdown-item {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0.50rem 1.5rem;
+}
+.dropdown-item:hover, .dropdown-item:focus, .dropdown-item.active, .dropdown-item:active {
+    color: #f15d30;
+    background-color: transparent;
+}
+.ftco-navbar-light.scrolled .dropdown-toggle {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    color: #000000 !important;
+}
+.ftco-navbar-light .navbar-brand,
+.ftco-navbar-light.scrolled .navbar-brand {
+    width: 83px;
+    padding: 0;
+}
+.hero-wrap.banner {
+    background-image: url("/images/main-bg.jpg");
+}
+.hero-wrap.hero-wrap-2 {
+    background-image: url("/images/main-bg.jpg");
+}
+.auth-form {
+    width: 100%;
+    max-width: 640px;
+    border-radius: 16px;
+    margin: 0 auto;
+}
+.auth-form .btn-primary {
+    width: 100%;
+}
+.forgot-password-link {
+    display: flex;
+    justify-content: space-between;
+}
+.error {
+    color: #ff0000;
+    font-size: 14px;
+}
+.search-property-1 .form-group .form-control.btn {
+    padding: 0;
+}
+.bg-class {
+    background-image: url("/images/bg_3.jpg");
+}
+.bg-1 {
+    background-image: url("/images/bottom-bg.jpg");
+}
+.gallery-section .col-lg-3 {
+    margin: 15px 0;
+}
+.gallery-section .image {
+    padding: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    display: block;
+    text-align: center;
+}
+.gallery-section .title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+    margin: 12px;
+}
+.ekko-lightbox .modal-title {
+    display: none;
+}
+.profile-section {
+    width: 640px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+.profile-section h3 {
+    background-color: #3c4048;
+    color: #ffffff;
+    padding: 15px;
+    width: 100%;
+    font-size: 14px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile-section a {
+    background: #ffffff;
+    color: #3c4048;
+    padding: 6px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.profile-section a:hover {
+    background: #f15d30;
+    color: #fff;
+}
+.profile-section > .d-flex {
+    padding: 15px;
+    border: 1px solid #3c4048;
+}
+.profile-section > .d-block {
+    padding: 15px;
+    border: 1px solid #3c4048;
+}
+.profile-section span {
+    width: 100%;
+    font-size: 14px;
+    margin: 2px 0;
+    color: #3c4048;
+}
+.profile-section .d-block span {
+    width: auto;
+}
+.edit-profile {
+    width: 100%;
+}
+.edit-profile .form-control {
+    border: 1px solid #3c4048;
+    font-size: 14px;
+    height: 41px !important;
+    margin: 0;
+    padding: 10px;
+}
+.edit-profile .form-control:disabled {
+    background-color: #e9ecef !important;
+}
+.edit-profile .btn-primary {
+    font-size: 14px;
+    background: #3c4048 !important;
+    border: 0 !important;
+    border-radius: 5px;
+    padding: 6px 24px;
+    height: 41px;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.edit-profile .btn-primary:hover {
+    background: #f15d30 !important;
+}
+.news_section ul {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
+.news_section li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+.news_section li a {
+    font-size: 24px;
+}
+.news_section li div {
+    font-size: 12px;
+}
+.desktop_hide {
+    display: none;
+}
+.search-property-1 .form-group label.error {
+    font-size: 12px;
+    font-weight: normal;
+    color: #f00;
+    text-transform: none;
+}
+#ftco-loader.show {
+    opacity: 0.25;
+}
+#ftco-loader.fullscreen {
+    background-color: #000;
+}
+.booking_tag {
+    margin: 40px 0;
+    background-color: #f15d30;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+.results .d-flex {
+    flex-wrap: wrap;
+}
+.results .box {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+    text-align: center;
+}
+.results .box input {
+  display: none;
+}
+.results .box label {
+  padding: 5px 10px;
+  margin: 0;
+  border: 3px solid #000;
+  border-radius: 20px;
+  width: 100%;
+  cursor: pointer;
+  display: block;
+  min-height: 75px;
+  background-color: #B9E4BD;
+}
+.results .box input:checked + label {
+  background-color: green;
+  border: 3px solid #000;
+}
+.results .box input:checked + label h4,
+.results .box input:checked + label p {
+  color: #fff;
+}
+.results .box label h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+.results .box label p {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.8);
+    margin: 0;
+}
+.results .box.disabled label {
+    background-color: #ff0000;
+    color: #fff;
+    border: 3px solid #000;
+}
+.results .box.disabled label h4,
+.results .box.disabled label p {
+    color: #fff;
+}
+#edit-booking-form .custom-file-label::after {
+    height: auto;
+    line-height: 28px;
+}
+#edit-booking-form .custom-file-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 80px;
+    white-space: nowrap;
+    color: #6c757d !important;
+}
+#edit-booking-form .custom-file-label.selected {
+    color: #000000 !important;
+}
+#edit-booking-form .custom-file-input {
+    cursor: pointer;
+}
+#edit-booking-form select.placeholder-shown {
+    color: #6c757d !important;
+}
+#edit-booking-form select.placeholder-hidden {
+    color: #000000;
+}
+#edit-booking-form label.error {
+    font-size: 12px;
+    margin: 0;
+    display: block;
+}
+#edit-booking-form .booking-details,
+#edit-booking-form .room-details {
+    padding: 15px;
+    border: 1px solid #3c4048;
+}
+#edit-booking-form .room-details {
+    font-size: 14px;
+    color: #000;
+    text-align: center;
+}
+#edit-booking-form .room-details .heading {
+    font-weight: bold;
+}
+#edit-booking-form .room-details .row {
+    margin-bottom: 10px;
+}
+#edit-booking-form .room-details select {
+    height: auto !important;
+    padding: 3px 10px;
+}
+.edit-booking-section {
+    width: 700px;
+}
+.pay_now {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.pay_now .btn-primary {
+    font-size: 14px;
+    background: #3c4048 !important;
+    border: 0 !important;
+    border-radius: 5px;
+    padding: 6px 24px;
+    height: 41px;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pay_now .btn-primary:hover {
+    background: #f15d30 !important;
+}
+.summary-section {
+    width: 700px;
+}
+.border-1 {
+    border: 1px solid #3c4048;
+}
+.p-15 {
+    padding: 15px;
+}
+.booking_data {
+    font-size: 14px;
+    color: #3c4048;
+    text-align: center;
+}
+.booking_data .heading {
+    font-weight: bold;
+}
+.w-200 {
+    min-width: 200px;
+}
+.pagination-wrap .pagination {
+    justify-content: center;
+    margin-top: 30px;
+}
+.pagination-wrap .page-link:focus {
+    box-shadow: none;
+}
+@media (max-width: 1199px) {
+    .booking_data {
+        overflow-x: auto;
+    }
+    .w-1100 {
+        width: 1100px;
+    }
+}
+@media (max-width: 991.98px) {
+    .desktop_hide {
+        display: block;
+    }
+    .mobile_hide {
+        display: none;
+    }
+    #edit-booking-form .room-details {
+        font-size: 12px;
+    }
+}
+@media (max-width: 767px) {
+    .summary-section, .edit-booking-section {
+        max-width: 100%;
+    }
+    .summary-section .col-md-4 {
+        flex: 0 0 41.66667%;
+        max-width: 41.66667%;
+    }
+    .summary-section .col-md-8 {
+        flex: 0 0 58.33333%;
+        max-width: 58.33333%;
+    }
+    .summary-section span {
+        font-size: 12px;
+        overflow-wrap: break-word;
+    }
+    #edit-booking-form .room-details {
+        overflow-x: auto;
+    }
+    #edit-booking-form .room-details .row {
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+    #edit-booking-form .room-details .heading {
+        font-size: 11px;
+    }
+    #edit-booking-form .room-details .row .col {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .w-500 {
+        width: 500px;
+    }
+}
