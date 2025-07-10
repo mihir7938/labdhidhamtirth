@@ -268,6 +268,15 @@ class PageController extends Controller
         } else if($room_booking[0]->status == '0') {
             return redirect()->route('room');
         } else {
+            $EncKey = '1FF49170C8CCECFF1345B38F971CABBD';
+            $SECURE_SECRET = '5FF1003BD85EC13EDDE106AC235F58AD';
+            $gatewayURL = 'https://payuatrbac.icicibank.com/accesspoint/angularBackEnd/requestproxypass';
+            $data['Version'] = '1';
+            $data['PassCode'] = 'ABCD1234';
+            $data['BankId'] = '24520';
+            $data['MCC'] = '8661';
+            $data['ReturnURL'] = 'https://dev.labdhidhamtirth.in/summary';
+            //$data['Amount'] = $data['Amount']*100;
             return view('summary')->with('room_booking', $room_booking);
         }
     }

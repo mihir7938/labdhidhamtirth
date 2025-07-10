@@ -29,6 +29,7 @@ Route::get('/booking', [PageController::class, 'booking'])->name('booking');
 Route::post('/update-room', [PageController::class, 'updateRoomDetails'])->name('booking.room.update');
 Route::post('/booking', [PageController::class, 'saveBooking'])->name('booking.save');
 Route::get('/summary', [PageController::class, 'bookingSummary'])->name('booking.summary');
+Route::post('/booking/paynow', [PageController::class, 'paynow'])->name('booking.paynow');
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/album/{id}', [PageController::class, 'getAlbum'])->name('gallery.album');
 Route::get('/room-gallery', [PageController::class, 'roomGallery'])->name('room.gallery');
