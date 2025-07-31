@@ -333,9 +333,17 @@ class PageController extends Controller
     }
     public function thankyou(Request $request)
     {
-        echo "thank you page";
-        echo '<pre>';
-        print_r($_POST);die;
+        try{
+            if($request->responseCode == '000' || $request->responseCode == '0000') {
+                return view('thank-you')->with('result', $request);
+            } else {
+                throw new BadRequestException($result->respDescription);
+            }
+        }catch(\Exception $e){
+            $request->session()->put('message', $e->getMessage());
+            $request->session()->put('alert-type', 'alert-warning');
+            return redirect()->back();
+        }
     }
     public function gallery(Request $request)
     {
