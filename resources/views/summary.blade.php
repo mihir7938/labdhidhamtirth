@@ -22,6 +22,17 @@
 <section class="ftco-section">
   <div class="container">
     <div class="profile-section summary-section">
+      @include('shared.alert')
+      @if (count($errors) > 0)
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <ul>
+          @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
       <form id="payment-form" name="payment-form" action="{{route('booking.paynow')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <h3>Booking Summary<a href="{{route('booking')}}">Edit Details</a></h3>

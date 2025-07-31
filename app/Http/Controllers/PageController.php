@@ -268,24 +268,74 @@ class PageController extends Controller
         } else if($room_booking[0]->status == '0') {
             return redirect()->route('room');
         } else {
-            $EncKey = '1FF49170C8CCECFF1345B38F971CABBD';
-            $SECURE_SECRET = '5FF1003BD85EC13EDDE106AC235F58AD';
-            $gatewayURL = 'https://payuatrbac.icicibank.com/accesspoint/angularBackEnd/requestproxypass';
-            $data['Version'] = '1';
-            $data['PassCode'] = 'ABCD1234';
-            $data['BankId'] = '24520';
-            $data['MCC'] = '8661';
-            $data['ReturnURL'] = 'https://dev.labdhidhamtirth.in/summary';
-            //$data['Amount'] = $data['Amount']*100;
             return view('summary')->with('room_booking', $room_booking);
         }
     }
     public function paynow(Request $request)
     {
-        if(!$request->session()->get('search_values')) {
-            return redirect(route('room'));
+        try{
+            if(!$request->session()->get('search_values')) {
+                return redirect(route('room'));
+            }
+            $search_values = $request->session()->get('search_values');
+            $room_booking = $this->roomService->getDetailsByBookingId($search_values['booking_id']);
+            $total_amount = $room_booking[0]->total_amount;
+            $email = $room_booking[0]->email;
+            $phone = "91".$room_booking[0]->phone;
+            $returnURL = route('booking.thankyou');
+            $current_date = date('YmdHis');
+            $merchantTxnNo = $current_date . rand(100, 999);
+            $txnDate = $current_date;
+            $url = "https://qa.phicommerce.com/pg/api/v2/initiateSale";
+            $data = [
+                "merchantId"       => "T_03342",
+                "merchantTxnNo"    => $merchantTxnNo,
+                "amount"           => $total_amount,
+                "currencyCode"     => "356",            
+                "payType"          => "0",              
+                "customerEmailID"  => $email,
+                "transactionType"  => "SALE",
+                "txnDate"          => $txnDate,
+                "returnURL"        => $returnURL,
+                "customerMobileNo" => $phone,
+                "addlParam1"       => "Test1",
+                "addlParam2"       => "Test2"
+            ];
+            $secretKey = 'abc';
+            $hashString = $data['addlParam1'] . $data['addlParam2'] . $data['amount'] . $data['currencyCode'] . $data['customerEmailID'] . $data['customerMobileNo'] . $data['merchantId'] . $data['merchantTxnNo'] . $data['payType'] . $data['returnURL'] . $data['transactionType'] . $data['txnDate'];
+            $data['secureHash'] = hash_hmac('sha256', $hashString, $secretKey);
+
+            $jsonData = json_encode($data);
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            $response = curl_exec($ch);
+            if (curl_errno($ch)) {
+                throw new BadRequestException(curl_error($ch));
+            } else {
+                $result = json_decode($response);
+                if($result->responseCode == 'R1000') {
+                    $redirect_url = $result->redirectURI."?tranCtx=".$result->tranCtx;
+                    return redirect()->away($redirect_url);
+                } else {
+                    throw new BadRequestException($result->responseDescription);
+                }
+            }
+            curl_close($ch);
+            return redirect()->back();
+        }catch(\Exception $e){
+            $request->session()->put('message', $e->getMessage());
+            $request->session()->put('alert-type', 'alert-warning');
+            return redirect()->back();
         }
-        return view('pay-now');
+    }
+    public function thankyou(Request $request)
+    {
+        echo "thank you page";
+        echo '<pre>';
+        print_r($_POST);die;
     }
     public function gallery(Request $request)
     {
