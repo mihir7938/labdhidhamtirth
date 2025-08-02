@@ -286,25 +286,26 @@ class PageController extends Controller
             $current_date = date('YmdHis');
             $merchantTxnNo = $current_date . rand(100, 999);
             $txnDate = $current_date;
-            $url = "https://qa.phicommerce.com/pg/api/v2/initiateSale";
+            $url = env('ICICI_API_URL').'/v2/initiateSale';
+            $merchantId = env('ICICI_MERCHANT_ID');
+            $merchant_key = env('ICICI_MERCHANT_SECRET_KEY');
+            $merchant_currency_code = env('ICICI_CURRENCY_CODE');
             $data = [
-                "merchantId"       => "T_03342",
+                "merchantId"       => $merchantId,
                 "merchantTxnNo"    => $merchantTxnNo,
                 "amount"           => $total_amount,
-                "currencyCode"     => "356",            
+                "currencyCode"     => $merchant_currency_code,            
                 "payType"          => "0",              
                 "customerEmailID"  => $email,
                 "transactionType"  => "SALE",
                 "txnDate"          => $txnDate,
                 "returnURL"        => $returnURL,
                 "customerMobileNo" => $phone,
-                "addlParam1"       => "Test1",
-                "addlParam2"       => "Test2"
+                "addlParam1"       => $search_values['booking_id'],
             ];
-            $secretKey = 'abc';
-            $hashString = $data['addlParam1'] . $data['addlParam2'] . $data['amount'] . $data['currencyCode'] . $data['customerEmailID'] . $data['customerMobileNo'] . $data['merchantId'] . $data['merchantTxnNo'] . $data['payType'] . $data['returnURL'] . $data['transactionType'] . $data['txnDate'];
+            $secretKey = $merchant_key;
+            $hashString = $data['addlParam1'] . $data['amount'] . $data['currencyCode'] . $data['customerEmailID'] . $data['customerMobileNo'] . $data['merchantId'] . $data['merchantTxnNo'] . $data['payType'] . $data['returnURL'] . $data['transactionType'] . $data['txnDate'];
             $data['secureHash'] = hash_hmac('sha256', $hashString, $secretKey);
-
             $jsonData = json_encode($data);
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
@@ -333,17 +334,31 @@ class PageController extends Controller
     }
     public function thankyou(Request $request)
     {
-        try{
-            if($request->responseCode == '000' || $request->responseCode == '0000') {
-                return view('thank-you')->with('result', $request);
-            } else {
-                throw new BadRequestException($result->respDescription);
+        $booking_id = $request->addlParam1;
+        $room_booking = $this->roomService->getDetailsByBookingId($booking_id);
+        $data['merchant_txn_no'] = $request->merchantTxnNo;
+        $data['resp_description'] = $request->respDescription;
+        $data['txn_id'] = $request->txnID;
+        $data['payment_id'] = $request->paymentID;
+        $data['payment_date'] = date("Y-m-d H:i:s", strtotime($request->paymentDateTime));
+        $data['payment_mode'] = $request->paymentMode;
+        $data['payment_sub_inst_type'] = $request->paymentSubInstType;
+        if($request->responseCode == '000' || $request->responseCode == '0000') {
+            $data['status'] = '3';
+            foreach($room_booking as $booking) {
+                $this->roomService->update($booking, $data);
             }
-        }catch(\Exception $e){
-            $request->session()->put('message', $e->getMessage());
-            $request->session()->put('alert-type', 'alert-warning');
-            return redirect()->back();
+            $request->session()->put('message', $request->respDescription);
+            $request->session()->put('alert-type', 'alert-success');
+        } else {
+            $data['status'] = '0';
+            foreach($room_booking as $booking) {
+                $this->roomService->update($booking, $data);
+            }
+            $request->session()->put('message', $request->respDescription);
+            $request->session()->put('alert-type', 'alert-danger');
         }
+        return view('thank-you')->with('result', $request)->with('room_booking', $room_booking);
     }
     public function gallery(Request $request)
     {

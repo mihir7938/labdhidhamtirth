@@ -33,6 +33,9 @@
         </ul>
       </div>
       @endif
+      <div class="pay_now">
+        <a href="#" class="btn btn-primary">Download Receipt</a>
+      </div>
       <h3>Transaction Summary</h3>
       <div class="border-1 p-15">
         <div class="row">
@@ -64,7 +67,7 @@
             <span><strong>Amount :</strong></span>
           </div>
           <div class="col-md-8">
-            <span>{{ $result->amount }}</span>
+            <span>₹{{ $result->amount }}</span>
           </div>
         </div>
         <div class="row">
@@ -80,28 +83,15 @@
             <span><strong>Payment Date :</strong></span>
           </div>
           <div class="col-md-8">
-            <span>{{ $result->paymentDateTime }}</span>
+            <span>{{ date("d M Y g:i a", strtotime($result->paymentDateTime)) }}</span>
           </div>
         </div>
+      </div>
+      <h3 class="mt-4">Booking Summary</h3>
+      <div class="border-1 p-15">
         <div class="row">
           <div class="col-md-4">
-            <span><strong>Mobile No :</strong></span>
-          </div>
-          <div class="col-md-8">
-            <span>{{ $result->customerMobileNo }}</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span><strong>Email ID :</strong></span>
-          </div>
-          <div class="col-md-8">
-            <span>{{ $result->customerEmailID }}</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span><strong>Parameter 1 :</strong></span>
+            <span><strong>Booking ID :</strong></span>
           </div>
           <div class="col-md-8">
             <span>{{ $result->addlParam1 }}</span>
@@ -109,28 +99,88 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <span><strong>Parameter 2 :</strong></span>
+            <span><strong>Check in Date :</strong></span>
           </div>
           <div class="col-md-8">
-            <span>{{ $result->addlParam2 }}</span>
+            <span>{{ date("d M Y", strtotime($room_booking[0]->check_in_date)) }} {{ date("g:i a", strtotime($room_booking[0]->check_in_time)) }}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <span><strong>Merchant ID :</strong></span>
+            <span><strong>Check out Date :</strong></span>
           </div>
           <div class="col-md-8">
-            <span>{{ $result->merchantId }}</span>
+            <span>{{ date("d M Y", strtotime($room_booking[0]->check_out_date)) }} {{ date("g:i a", strtotime($room_booking[0]->check_out_time)) }}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <span><strong>Merchant Transaction No :</strong></span>
+            <span><strong>Total Days :</strong></span>
           </div>
           <div class="col-md-8">
-            <span>{{ $result->merchantTxnNo }}</span>
+            <span>{{$room_booking[0]->days}}</span>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span><strong>Customer Name :</strong></span>
+          </div>
+          <div class="col-md-8">
+            <span>{{$room_booking[0]->customer_name}}</span>
+          </div>
+        </div>
+        @if($room_booking[0]->company_name)
+          <div class="row">
+            <div class="col-md-4">
+              <span><strong>Company Name :</strong></span>
+            </div>
+            <div class="col-md-8">
+              <span>{{$room_booking[0]->company_name}}</span>
+            </div>
+          </div>
+        @endif
+        <div class="row">
+          <div class="col-md-4">
+            <span><strong>Mobile No:</strong></span>
+          </div>
+          <div class="col-md-8">
+            <span>{{$room_booking[0]->phone}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span><strong>Email ID:</strong></span>
+          </div>
+          <div class="col-md-8">
+            <span>{{$room_booking[0]->email}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span><strong>Address :</strong></span>
+          </div>
+          <div class="col-md-8">
+            <span>{{$room_booking[0]->address}}, {{$room_booking[0]->city}}, {{$room_booking[0]->state}}-{{$room_booking[0]->pin_code}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span><strong>Room Type :</strong></span>
+          </div>
+          <div class="col-md-8">
+            <span>{{$room_booking[0]->room_type->name}}</span>
+          </div>
+        </div>
+        @foreach($room_booking as $booking)
+          <div class="row">
+            <div class="col-md-4">
+              <span><strong>Room No :</strong></span>
+            </div>
+            <div class="col-md-8">
+              <span>{{ $booking->room->roomname }} (Extra Bed : {{ $booking->extra_bed }})</span>
+            </div>
+          </div>
+        @endforeach
       </div>
     </div>
   </div>

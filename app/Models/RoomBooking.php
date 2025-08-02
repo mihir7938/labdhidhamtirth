@@ -27,6 +27,13 @@ class RoomBooking extends Model
         'id_proof',
         'id_proof_document',
         'status',
+        'merchant_txn_no',
+        'resp_description',
+        'txn_id',
+        'payment_id',
+        'payment_date',
+        'payment_mode',
+        'payment_sub_inst_type',
     ];
 
     public function room() {
