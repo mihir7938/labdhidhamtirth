@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReceiptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::post('/update-room', [PageController::class, 'updateRoomDetails'])->name(
 Route::post('/booking', [PageController::class, 'saveBooking'])->name('booking.save');
 Route::get('/summary', [PageController::class, 'bookingSummary'])->name('booking.summary');
 Route::post('/booking/paynow', [PageController::class, 'paynow'])->name('booking.paynow');
-Route::post('/thank-you', [PageController::class, 'thankyou'])->name('booking.thankyou');
+Route::match(['get', 'post'],'/thank-you', [PageController::class, 'thankyou'])->name('booking.thankyou');
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/album/{id}', [PageController::class, 'getAlbum'])->name('gallery.album');
 Route::get('/room-gallery', [PageController::class, 'roomGallery'])->name('room.gallery');
@@ -39,6 +40,7 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'saveContact'])->name('save.contact');
 Route::get('/news/{id}', [PageController::class, 'getSingleNews'])->name('get.news');
 Route::get('/setSession', [PageController::class, 'setSession'])->name('set_session');
+Route::get('/receipt/download/{id}', [ReceiptController::class, 'generatePDF'])->name('generate_pdf');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::get('/login', [AuthController::class, 'getLogin'])->name('login');

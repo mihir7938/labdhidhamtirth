@@ -46,7 +46,7 @@
                                     <a href="{{route('admin.booking.view', ['id' => $booking->booking_id])}}" class="btn btn-info btn-circle">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="#" class="btn btn-success btn-circle">
+                                    <a href="{{route('generate_pdf', ['id' => $booking->booking_id])}}" class="btn btn-success btn-circle">
                                         <i class="fas fa-download"></i>
                                     </a>
                                 </td>

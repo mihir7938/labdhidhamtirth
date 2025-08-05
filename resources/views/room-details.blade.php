@@ -42,10 +42,10 @@
                     @endif
                 @endforeach
             @else
-                <div class="col">@if($booking->amount) {{ $booking->amount }} @else {{ $booking->room->amount }} @endif</div> 
+                <div class="col">@if($booking->amount) {{ $booking->amount }} @else {{ $booking->days*$booking->room->amount }} @endif</div> 
             @endif
           </div>
-          <?php $sum_amount += $booking->room->amount ?>
+          <?php $sum_amount += ($booking->days*$booking->room->amount) ?>
         @endforeach
         @php
             $tot_amount = $booking->total_amount ? $booking->total_amount : $sum_amount;

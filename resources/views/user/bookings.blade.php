@@ -41,7 +41,7 @@
               <div class="col w-200">{{ date("d M Y", strtotime($booking->check_in_date)) }} {{ date("g:i a", strtotime($booking->check_in_time)) }}</div>
               <div class="col w-200">{{ date("d M Y", strtotime($booking->check_out_date)) }} {{ date("g:i a", strtotime($booking->check_out_time)) }}</div>
               <div class="col">₹{{ $booking->total_amount }}</div>
-              <div class="col"><a href="{{route('user.booking.view', ['id' => $booking->booking_id])}}" data-toggle="tooltip" title="View Booking" class="mr-3"><span class="icon fa fa-eye"></span></a><a href="#" data-toggle="tooltip" title="Download Receipt"><span class="icon fa fa-download"></span></a></div>
+              <div class="col"><a href="{{route('user.booking.view', ['id' => $booking->booking_id])}}" data-toggle="tooltip" title="View Booking" class="mr-3"><span class="icon fa fa-eye"></span></a><a href="{{route('generate_pdf', ['id' => $booking->booking_id])}}" data-toggle="tooltip" title="Download Receipt"><span class="icon fa fa-download"></span></a></div>
             </div>
           @endforeach
         </div>

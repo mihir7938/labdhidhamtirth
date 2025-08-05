@@ -215,7 +215,7 @@ class PageController extends Controller
         $total_amount = 0;
         foreach($request->extrabed as $key=>$val) {
             $room_booking = RoomBooking::find($key);
-            $total = $room_booking->room->amount + ($room_booking->room->extrabedamt*$val);
+            $total = ($room_booking->days*$room_booking->room->amount) + ($room_booking->days*$room_booking->room->extrabedamt*$val);
             $total_amount = $total_amount + $total;
             $amount[$key] = $total;
             $extrabed[$key] = $val;
@@ -236,7 +236,7 @@ class PageController extends Controller
         foreach($request->extrabed as $key=>$val) {
             $room_booking = RoomBooking::find($key);
             $data['extra_bed'] = $val;
-            $data['amount'] = $room_booking->room->amount + ($room_booking->room->extrabedamt*$val);
+            $data['amount'] = ($room_booking->days*$room_booking->room->amount) + ($room_booking->days*$room_booking->room->extrabedamt*$val);
             $data['total_amount'] = $request->total_amount;
             $data['customer_name'] = $request->customer_name;
             $data['company_name'] = $request->company_name;
@@ -334,6 +334,9 @@ class PageController extends Controller
     }
     public function thankyou(Request $request)
     {
+        if ($request->isMethod('get')) {
+            return redirect()->route('room');
+        }
         $booking_id = $request->addlParam1;
         $room_booking = $this->roomService->getDetailsByBookingId($booking_id);
         $data['merchant_txn_no'] = $request->merchantTxnNo;

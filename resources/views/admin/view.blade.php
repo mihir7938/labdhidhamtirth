@@ -160,7 +160,7 @@
                 <span><strong>Receipt :</strong></span>
               </div>
               <div class="col-md-10">
-                <a href="#">Download</a>
+                <a href="{{route('generate_pdf', ['id' => $booking->booking_id])}}">Download</a>
               </div>
             </div>
         </div>

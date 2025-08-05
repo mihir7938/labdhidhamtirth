@@ -33,9 +33,11 @@
         </ul>
       </div>
       @endif
-      <div class="pay_now">
-        <a href="#" class="btn btn-primary">Download Receipt</a>
-      </div>
+      @if($result->responseCode == '000' || $result->responseCode == '0000')
+        <div class="pay_now">
+          <a href="{{route('generate_pdf', ['id' => $result->addlParam1])}}" class="btn btn-primary">Download Receipt</a>
+        </div>
+      @endif
       <h3>Transaction Summary</h3>
       <div class="border-1 p-15">
         <div class="row">
